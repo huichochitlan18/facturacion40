@@ -1,0 +1,814 @@
+<form [formGroup]="factura">
+  <div class="container-xl contenido">
+    <div class="row">
+      <mat-card>
+        <mat-card-title>Comprobante</mat-card-title>
+        <mat-card>
+          <div class="row">
+            <div class="col">
+              <!-- <button mat-raised-button color="primary" (click)="testf()">Agregar</button> -->
+              <mat-form-field class="input-full-width" appearance="outline">
+                <mat-label>Código Postal</mat-label>
+                <!-- <mat-label><mat-icon color="primary" matTooltip="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto natus tempora libero aut rerum deleniti, aliquid fuga beatae sunt eveniet qui, ullam sint assumenda, rem provident a ex autem reprehenderit."
+                                    matTooltipClass="text-tooltip-red">help</mat-icon>   Código Postal</mat-label>              
+                                (focus)="controlSeleccionado($any($event).target.id)"                   -->
+                <input
+                  id="cp"
+                  formControlName="cp"
+                  matInput
+                  placeholder="50200"
+                  mask="00000"
+                />
+                <button
+                  *ngIf="this.factura.value.cp"
+                  matSuffix
+                  mat-icon-button
+                  aria-label="Clear"
+                  (click)="this.factura.controls['cp'].setValue('')"
+                >
+                  <mat-icon>close</mat-icon>
+                </button>
+                <!-- <button
+                  type="button"
+                  mat-icon-button
+                  matSuffix
+                  color="primary"
+                  matTooltip="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto natus tempora libero aut rerum deleniti, aliquid fuga beatae sunt eveniet qui, ullam sint assumenda, rem provident a ex autem reprehenderit."
+                  matTooltipClass="text-tooltip-red"
+                >
+                  <mat-icon>help_outline</mat-icon>
+                </button> -->
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="input-full-width" appearance="outline">
+                <mat-label>Fecha de emisión</mat-label>
+                <input
+                  id="fechaEmision"
+                  formControlName="fechaEmision"
+                  matInput
+                  [matDatepicker]="picker"
+                  value="07/01/2022"
+                />
+                <button
+                  *ngIf="this.factura.value.fechaEmision"
+                  matSuffix
+                  mat-icon-button
+                  aria-label="Clear"
+                  (click)="this.factura.controls['fechaEmision'].setValue('')"
+                >
+                  <mat-icon>close</mat-icon>
+                </button>
+                <!-- <button
+                  type="button"
+                  mat-icon-button
+                  matSuffix
+                  color="primary"
+                  matTooltip="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto natus tempora libero aut rerum deleniti, aliquid fuga beatae sunt eveniet qui, ullam sint assumenda, rem provident a ex autem reprehenderit."
+                  matTooltipClass="text-tooltip-red"
+                >
+                  <mat-icon>help_outline</mat-icon>
+                </button> -->
+                <mat-hint>MM/DD/AAAA</mat-hint>
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="input-full-width" appearance="outline">
+                <mat-label>Tipo de factura</mat-label>
+                <!-- <button
+                  type="button"
+                  mat-icon-button
+                  matSuffix
+                  color="primary"
+                  matTooltip="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto natus tempora libero aut rerum deleniti, aliquid fuga beatae sunt eveniet qui, ullam sint assumenda, rem provident a ex autem reprehenderit."
+                  matTooltipClass="text-tooltip-red"
+                >
+                  <mat-icon>help_outline</mat-icon>
+                </button> -->
+                <mat-select required>
+                  <mat-option
+                    *ngFor="let TipoDeComprobante of catalogoTipoDeComprobante"
+                    [value]="TipoDeComprobante.TipoDeComprobante"
+                  >
+                    {{ TipoDeComprobante.Descripcion }}
+                  </mat-option>
+                </mat-select>
+
+                <!-- <mat-error *ngIf="animalControl.hasError('required')">Please choose an animal</mat-error>
+                                                <mat-hint>{{animalControl.value?.sound}}</mat-hint> -->
+              </mat-form-field>
+            </div>
+
+            <div class="col">
+              <mat-form-field class="input-full-width" appearance="outline">
+                <mat-label>Forma de pago</mat-label>
+                <!-- <button
+                  type="button"
+                  mat-icon-button
+                  matSuffix
+                  color="primary"
+                  matTooltip="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto natus tempora libero aut rerum deleniti, aliquid fuga beatae sunt eveniet qui, ullam sint assumenda, rem provident a ex autem reprehenderit."
+                  matTooltipClass="text-tooltip-red"
+                >
+                  <mat-icon>help_outline</mat-icon>
+                </button> -->
+                <mat-select required>
+                  <mat-option
+                    *ngFor="let FormaPago of catalogoFormaPago"
+                    [value]="FormaPago.FormaPago"
+                  >
+                    {{ FormaPago.Descripcion }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="col">
+              <mat-form-field class="input-full-width" appearance="outline">
+                <mat-label>Método de pago</mat-label>
+                <!-- <button
+                  type="button"
+                  mat-icon-button
+                  matSuffix
+                  color="primary"
+                  matTooltip="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto natus tempora libero aut rerum deleniti, aliquid fuga beatae sunt eveniet qui, ullam sint assumenda, rem provident a ex autem reprehenderit."
+                  matTooltipClass="text-tooltip-red"
+                >
+                  <mat-icon>help_outline</mat-icon>
+                </button> -->
+                <mat-select required>
+                  <mat-option
+                    *ngFor="let MetodoPago of catalogoMetodoPago"
+                    [value]="MetodoPago.MetodoPago"
+                  >
+                    {{ MetodoPago.Descripcion }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card>
+        <br />
+        <mat-card>
+          <mat-card-title>Datos Generales</mat-card-title>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="input-full-width" appearance="outline">
+                <mat-label>Moneda*:</mat-label>
+                <input
+                  matInput
+                  placeholder="Moneda"
+                  value=""
+                  [matAutocomplete]="auto"
+                  (keydown)="filter($any($event).target.value)"
+                />
+                <button
+                  type="button"
+                  mat-icon-button
+                  matSuffix
+                  color="primary"
+                  matTooltip="Selecciona el tipo moneda con la cual se realizo la operación."
+                  matTooltipClass="text-tooltip-red"
+                >
+                  <mat-icon>help_outline</mat-icon>
+                </button>
+                <mat-autocomplete
+                  autoActiveFirstOption
+                  #auto="matAutocomplete"
+                  [displayWith]="obtenerTituloMoenda.bind(this)"
+                >
+                  <mat-option
+                    *ngFor="let moneda of catalogoMonedaFiltro"
+                    [value]="moneda.Moneda"
+                  >
+                    {{ moneda.Descripcion }}
+                  </mat-option>
+                </mat-autocomplete>
+                <!-- <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                        {{option}}
+                                    </mat-option>oosssssssfdddd
+                                </mat-autocomplete> -->
+              </mat-form-field>
+            </div>
+
+            <div class="col">
+              <mat-form-field class="input-full-width" appearance="outline">
+                <mat-label>Tipo de Cambio:</mat-label>
+                <button
+                  type="button"
+                  mat-icon-button
+                  matSuffix
+                  color="primary"
+                  matTooltip="Cuan hayas selecciona oqw"
+                  matTooltipClass="text-tooltip-red"
+                >
+                  <mat-icon>help_outline</mat-icon>
+                </button>
+                <input matInput placeholder="Tipo de Cambio" value="" />
+              </mat-form-field>
+            </div>
+
+            <div class="col">
+              <mat-form-field class="input-full-width" appearance="outline">
+                <mat-label>Serie:</mat-label>
+                <button
+                  type="button"
+                  mat-icon-button
+                  matSuffix
+                  color="primary"
+                  matTooltip="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto natus tempora libero aut rerum deleniti, aliquid fuga beatae sunt eveniet qui, ullam sint assumenda, rem provident a ex autem reprehenderit."
+                  matTooltipClass="text-tooltip-red"
+                >
+                  <mat-icon>help_outline</mat-icon>
+                </button>
+                <input matInput placeholder="Serie" value="" />
+              </mat-form-field>
+            </div>
+
+            <div class="col">
+              <mat-form-field class="input-full-width" appearance="outline">
+                <mat-label>Folio:</mat-label>
+                <button
+                  type="button"
+                  mat-icon-button
+                  matSuffix
+                  color="primary"
+                  matTooltip="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto natus tempora libero aut rerum deleniti, aliquid fuga beatae sunt eveniet qui, ullam sint assumenda, rem provident a ex autem reprehenderit."
+                  matTooltipClass="text-tooltip-red"
+                >
+                  <mat-icon>help_outline</mat-icon>
+                </button>
+                <input matInput placeholder="Folio" value="" />
+              </mat-form-field>
+            </div>
+
+            <div class="col">
+              <mat-form-field class="input-full-width" appearance="outline">
+                <mat-label>Condiciones de Pago</mat-label>
+                <button
+                  type="button"
+                  mat-icon-button
+                  matSuffix
+                  color="primary"
+                  matTooltip="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto natus tempora libero aut rerum deleniti, aliquid fuga beatae sunt eveniet qui, ullam sint assumenda, rem provident a ex autem reprehenderit."
+                  matTooltipClass="text-tooltip-red"
+                >
+                  <mat-icon>help_outline</mat-icon>
+                </button>
+                <input matInput placeholder="Condiciones de Pago" value="" />
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card>
+
+        <br />
+        <mat-card>
+          <p>
+            <button
+              type="button"
+              mat-icon-button
+              matSuffix
+              color="primary"
+              matTooltip="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto natus tempora libero aut rerum deleniti, aliquid fuga beatae sunt eveniet qui, ullam sint assumenda, rem provident a ex autem reprehenderit."
+              matTooltipClass="text-tooltip-red"
+            >
+              <mat-icon>help_outline</mat-icon>
+            </button>
+            <mat-checkbox (change)="esFacturaGloba($event)"
+              >Es una Factura Global</mat-checkbox
+            >
+          </p>
+        </mat-card>
+        <br />
+
+        <mat-card *ngIf="facturaGloba">
+          <mat-card-title>Factura Global</mat-card-title>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="input-full-width" appearance="outline">
+                <mat-label>Periodicidad:</mat-label>
+                <button
+                  type="button"
+                  mat-icon-button
+                  matSuffix
+                  color="primary"
+                  matTooltip="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto natus tempora libero aut rerum deleniti, aliquid fuga beatae sunt eveniet qui, ullam sint assumenda, rem provident a ex autem reprehenderit."
+                  matTooltipClass="text-tooltip-red"
+                >
+                  <mat-icon>help_outline</mat-icon>
+                </button>
+                <mat-select required>
+                  <mat-option>--</mat-option>
+                  <mat-option value="test">test</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="col">
+              <mat-form-field class="input-full-width" appearance="outline">
+                <mat-label>Mes:</mat-label>
+                <button
+                  type="button"
+                  mat-icon-button
+                  matSuffix
+                  color="primary"
+                  matTooltip="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto natus tempora libero aut rerum deleniti, aliquid fuga beatae sunt eveniet qui, ullam sint assumenda, rem provident a ex autem reprehenderit."
+                  matTooltipClass="text-tooltip-red"
+                >
+                  <mat-icon>help_outline</mat-icon>
+                </button>
+                <mat-select required>
+                  <mat-option>--</mat-option>
+                  <mat-option value="test">test</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="col">
+              <mat-form-field class="input-full-width" appearance="outline">
+                <mat-label>Año:</mat-label>
+                <button
+                  type="button"
+                  mat-icon-button
+                  matSuffix
+                  color="primary"
+                  matTooltip="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto natus tempora libero aut rerum deleniti, aliquid fuga beatae sunt eveniet qui, ullam sint assumenda, rem provident a ex autem reprehenderit."
+                  matTooltipClass="text-tooltip-red"
+                >
+                  <mat-icon>help_outline</mat-icon>
+                </button>
+                <input matInput placeholder="Folio" value="" required />
+              </mat-form-field>
+            </div>
+
+            <div class="col">
+              <mat-form-field class="input-full-width" appearance="outline">
+                <mat-label>Condiciones de Pago</mat-label>
+                <button
+                  type="button"
+                  mat-icon-button
+                  matSuffix
+                  color="primary"
+                  matTooltip="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto natus tempora libero aut rerum deleniti, aliquid fuga beatae sunt eveniet qui, ullam sint assumenda, rem provident a ex autem reprehenderit."
+                  matTooltipClass="text-tooltip-red"
+                >
+                  <mat-icon>help_outline</mat-icon>
+                </button>
+                <input matInput placeholder="Condiciones de Pago" value="" />
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card>
+
+        <br />
+        <mat-card>
+          <div class="row">
+            <div class="col">
+              <p>
+                <mat-checkbox (change)="esExportacion($event)"
+                  >Es una Exportación
+                </mat-checkbox>
+              </p>
+            </div>
+            <div class="col" *ngIf="exportacion">
+              <mat-form-field appearance="outline" class="input-full-width">
+                <mat-label>Exportación:</mat-label>
+                <mat-select required>
+                  <mat-option>--</mat-option>
+                  <mat-option value="test">test</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card>
+
+        <mat-card>
+          <mat-card-title>Datos del cliente</mat-card-title>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="input-full-width" appearance="outline">
+                <mat-label>Cliente Frecuente:</mat-label>
+                <input matInput placeholder="" value="" />
+              </mat-form-field>
+            </div>
+
+            <div class="col">
+              <mat-form-field class="input-full-width" appearance="outline">
+                <mat-label>Nombre o Razón Social:</mat-label>
+                <input matInput placeholder="" value="" />
+              </mat-form-field>
+            </div>
+
+            <div class="col">
+              <mat-form-field class="input-full-width" appearance="outline">
+                <mat-label>Uso de Factura:</mat-label>
+                <input matInput placeholder="" value="" />
+              </mat-form-field>
+            </div>
+
+            <div class="col">
+              <mat-form-field class="input-full-width" appearance="outline">
+                <mat-label>Código Postal:</mat-label>
+                <input matInput placeholder="" value="" />
+              </mat-form-field>
+            </div>
+
+            <div class="col">
+              <mat-form-field class="input-full-width" appearance="outline">
+                <mat-label>Régimen Fiscal:</mat-label>
+                <input matInput placeholder="" value="" />
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card>
+
+        <mat-card>
+          <mat-card-title>Producto y servicio</mat-card-title>
+
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="mostrarAgregarProducto()"
+          >
+            Agregar
+          </button>
+
+          <div class="row" *ngIf="agregarProducto">
+            <div class="col">
+              <mat-form-field class="input-full-width" appearance="outline">
+                <mat-label>Descripción Detallada</mat-label>
+                <input matInput placeholder="" value="" />
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="input-full-width" appearance="outline">
+                <mat-label>Producto o Servicio</mat-label>
+                <input matInput placeholder="" value="" />
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="input-full-width" appearance="outline">
+                <mat-label>Unidad de Medida</mat-label>
+                <input matInput placeholder="" value="" />
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="input-full-width" appearance="outline">
+                <mat-label>Descripción de la Unidad</mat-label>
+                <input matInput placeholder="" value="" />
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="input-full-width" appearance="outline">
+                <mat-label>Cantidad</mat-label>
+                <input matInput placeholder="" value="" />
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="input-full-width" appearance="outline">
+                <mat-label>Valor Unitario</mat-label>
+                <input matInput placeholder="" value="" />
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="input-full-width" appearance="outline">
+                <mat-label>Importe</mat-label>
+                <input matInput placeholder="" value="" />
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="input-full-width" appearance="outline">
+                <mat-label>Descuento</mat-label>
+                <input matInput placeholder="" value="" />
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="input-full-width" appearance="outline">
+                <mat-label>Objeto de Impuesto</mat-label>
+                <input matInput placeholder="" value="" />
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="input-full-width" appearance="outline">
+                <mat-label>Número de Identificacón</mat-label>
+                <input matInput placeholder="" value="" />
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="input-full-width" appearance="outline">
+                <mat-label>Número de Identificacón</mat-label>
+                <input matInput placeholder="" value="" />
+              </mat-form-field>
+            </div>
+            <p>
+              <mat-checkbox (change)="mostrarACuentaDeTerceros($event)"
+                >A cuenta de terceros
+              </mat-checkbox>
+            </p>
+            <div *ngIf="aCuentaDeTerceros">
+              <mat-card>
+                <mat-card-title>A cuenta de Terceros</mat-card-title>
+                <div class="row">
+                  <div class="col">
+                    <mat-form-field
+                      class="input-full-width"
+                      appearance="outline"
+                    >
+                      <mat-label>RFC del Tercero</mat-label>
+                      <input matInput placeholder="" value="" />
+                    </mat-form-field>
+                  </div>
+                  <div class="col">
+                    <mat-form-field
+                      class="input-full-width"
+                      appearance="outline"
+                    >
+                      <mat-label>Nombre o Razón Social</mat-label>
+                      <input matInput placeholder="" value="" />
+                    </mat-form-field>
+                  </div>
+                  <div class="col">
+                    <mat-form-field
+                      class="input-full-width"
+                      appearance="outline"
+                    >
+                      <mat-label>Régimen Fiscal</mat-label>
+                      <input matInput placeholder="" value="" />
+                    </mat-form-field>
+                  </div>
+                  <div class="col">
+                    <mat-form-field
+                      class="input-full-width"
+                      appearance="outline"
+                    >
+                      <mat-label>Código Postal</mat-label>
+                      <input matInput placeholder="" value="" />
+                    </mat-form-field>
+                  </div>
+                </div>
+              </mat-card>
+              <mat-card>
+                <mat-card-title>Número de pedimento</mat-card-title>
+                <div class="row">
+                  <div class="col">
+                    <p>
+                      Captura el Número de Pedimento únicamente cuando se trate
+                      de la venta de primera mano de Mercancia Importada
+                    </p>
+                  </div>
+                  <div class="col">
+                    <div *ngIf="!numeroPedimento">
+                      <button
+                        mat-raised-button
+                        color="primary"
+                        (click)="mostrarNumeroPedimento()"
+                      >
+                        Agregar Pedimento
+                      </button>
+                    </div>
+                    <div>
+                      <div class="row" *ngIf="numeroPedimento">
+                        <div class="col">
+                          <mat-form-field
+                            class="input-full-width"
+                            appearance="outline"
+                          >
+                            <mat-label>Número de Pedimento</mat-label>
+                            <input matInput placeholder="" value="" />
+                          </mat-form-field>
+                        </div>
+                        <div class="col-12">
+                          <button mat-raised-button color="primary">
+                            Agregar
+                          </button>
+                          <button
+                            mat-raised-button
+                            color="warn"
+                            (click)="mostrarNumeroPedimento()"
+                          >
+                            Cancelar
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </mat-card>
+            </div>
+            <div class="col-12">
+              <button mat-raised-button color="primary">Agregar</button>
+              <button mat-raised-button color="warn">Cancelar</button>
+            </div>
+          </div>
+
+          <table
+            mat-table
+            [dataSource]="dataSource"
+            class="table table-striped table-hover"
+          >
+            <!--- Note that these columns can be defined in any order.
+                                  The actual rendered columns are set as a property on the row definition" -->
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="position">
+              <th mat-header-cell *matHeaderCellDef>No.</th>
+              <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="descripcion">
+              <th mat-header-cell *matHeaderCellDef>Descripción</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.descripcion }}
+              </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="productoOServicio">
+              <th mat-header-cell *matHeaderCellDef>Producto o Servicio</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.productoOServicio }}
+              </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="unidad">
+              <th mat-header-cell *matHeaderCellDef>Unidad</th>
+              <td mat-cell *matCellDef="let element">{{ element.unidad }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="cantidad">
+              <th mat-header-cell *matHeaderCellDef>Cantidad</th>
+              <td mat-cell *matCellDef="let element">{{ element.cantidad }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="valorUnitario">
+              <th mat-header-cell *matHeaderCellDef>Valor Unitario</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.valorUnitario }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="importe">
+              <th mat-header-cell *matHeaderCellDef>Importe</th>
+              <td mat-cell *matCellDef="let element">{{ element.importe }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="descuento">
+              <th mat-header-cell *matHeaderCellDef>Descuento</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.descuento }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="objetoDeImpuesto">
+              <th mat-header-cell *matHeaderCellDef>Objeto de Impuesto</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.objetoDeImpuesto }}
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </mat-card>
+
+        <mat-card>
+          <mat-card-title>Facturas Relacionadas</mat-card-title>
+          <p>
+            <mat-checkbox (change)="monstrartieneFacturasRelacionadas($event)"
+              >Tiene Facturas Relacionadas
+            </mat-checkbox>
+          </p>
+          <div class="row" *ngIf="tieneFacturasRelacionadas">
+            <div class="col-12" *ngIf="!agregarFacturasRelacionadas">
+              <button
+                mat-raised-button
+                color="primary"
+                (click)="mostrarAgregarFacturasRelacionadas()"
+              >
+                Agregar
+              </button>
+            </div>
+            <div *ngIf="agregarFacturasRelacionadas">
+              <div class="col">
+                <mat-form-field appearance="outline" class="input-full-width">
+                  <mat-label>Tipo de Relación:</mat-label>
+                  <mat-select required>
+                    <mat-option>--</mat-option>
+                    <mat-option value="test">test</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field class="input-full-width" appearance="outline">
+                  <mat-label>Folio Fiscal:</mat-label>
+                  <input matInput placeholder="" value="" />
+                </mat-form-field>
+              </div>
+              <div class="col-12">
+                <button mat-raised-button color="primary">Agregar</button>
+                <button
+                  mat-raised-button
+                  color="warn"
+                  (click)="mostrarAgregarFacturasRelacionadas()"
+                >
+                  Cancelar
+                </button>
+              </div>
+            </div>
+          </div>
+        </mat-card>
+
+        <mat-card>
+          <mat-card-title>Totales</mat-card-title>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="input-full-width" appearance="outline">
+                <mat-label>Régimen Fiscal</mat-label>
+                <input matInput placeholder="" value="" />
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="input-full-width" appearance="outline">
+                <mat-label>Régimen Fiscal</mat-label>
+                <input matInput placeholder="" value="" />
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="input-full-width" appearance="outline">
+                <mat-label>Régimen Fiscal</mat-label>
+                <input matInput placeholder="" value="" />
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="input-full-width" appearance="outline">
+                <mat-label>Régimen Fiscal</mat-label>
+                <input matInput placeholder="" value="" />
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="input-full-width" appearance="outline">
+                <mat-label>Régimen Fiscal</mat-label>
+                <input matInput placeholder="" value="" />
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card>
+
+        <!-- <mat-card-actions>
+                        <button mat-button>LIKE</button>
+                        <button mat-button>SHARE</button>
+                    </mat-card-actions> -->
+      </mat-card>
+    </div>
+  </div>
+  <div class="container-xl">
+    <div class="row">
+      <mat-card>
+        <mat-card-title>Leyendas Fiscales</mat-card-title>
+        <div class="col">
+          <mat-form-field class="input-full-width" appearance="outline">
+            <mat-label>Clearable input</mat-label>
+            <!-- <input matInput type="text" [(ngModel)]="value"> -->
+            <input matInput type="text" />
+            <button
+              *ngIf="value"
+              matSuffix
+              mat-icon-button
+              aria-label="Clear"
+              (click)="value = ''"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+            <button
+              type="button"
+              mat-icon-button
+              matSuffix
+              color="primary"
+              matTooltip="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto natus tempora libero aut rerum deleniti, aliquid fuga beatae sunt eveniet qui, ullam sint assumenda, rem provident a ex autem reprehenderit."
+              matTooltipClass="text-tooltip-red"
+            >
+              <mat-icon>help_outline</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="input-full-width" appearance="outline">
+            <mat-label>WWW</mat-label>
+            <input matInput />
+            <button type="button" mat-icon-button matSuffix>
+              <mat-icon>search</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</form>

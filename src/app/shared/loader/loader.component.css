@@ -1,0 +1,14 @@
+.loaderFondo {
+    height: 100vh;
+    background-color: #4b636e;
+}
+
+.loaderTexto {
+    position: absolute;
+    font-size: 100px;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

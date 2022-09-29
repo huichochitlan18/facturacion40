@@ -1,0 +1,99 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+/* body {
+    height: 100%;
+} */
+
+body {
+    /* margin: 0; */
+    font-size: 96%;
+    /* font-size: 87.5%; */
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-form-field-label mat-label {    
+    pointer-events: auto;
+}
+
+
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+/* table {
+    width: 100%;
+} */
+
+/* .mat-row:nth-child(even) {
+    background-color: #eceff1;
+} */
+
+/* .mat-row:nth-child(odd) {
+    background-color: black;
+} */
+
+/* .mat-row:hover {
+    background-color: #babdbe;
+} */
+
+.mat-card {
+    background: unset;
+}
+
+.mat-card:not([class*=mat-elevation-z]) {
+    box-shadow: 0px 0px 10px 1px rgb(0 0 0 / 10%),
+        0px 1px 1px 0px rgb(0 0 0 / 14%),
+        0px 1px 3px 0px rgb(0 0 0 / 12%);
+    /* box-shadow: 0px 1px 1px -1px rgb(0 0 0 / 10%), 
+                0px 1px 1px 0px rgb(0 0 0 / 14%), 
+                0px 1px 3px 0px rgb(0 0 0 / 12%); */
+}
+
+.contenido {
+    margin-top: 58px
+}
+
+.position-fixed {
+    /* position: fixed; */
+    z-index: 40;
+}
+
+
+.mat-toolbar {
+    height: 56px;
+}
+
+.input-full-width {
+    width: 100%;
+}
+
+/* .container .mat-form-field+.mat-form-field {
+    margin-left: 8px;
+}
+
+.example-container .mat-form-field {
+    width: 220px;
+}
+
+.example-container form {
+    margin-bottom: 20px;
+}
+
+.example-container form>* {
+    margin: 5px 0;
+}
+
+.example-container .mat-radio-button {
+    margin: 0 12px;
+}
+
+mat-form-field {
+    width: 400px;
+} */
+.text-tooltip-red {
+    font-size: 16px;
+    background: #b71c1c;
+}
+
